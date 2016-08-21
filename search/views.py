@@ -11,7 +11,7 @@ pokemon_data = {"Bulbasaur":"http://img.pokemondb.net/artwork/bulbasaur.jpg","Iv
 
 
 def search_pokemon(search_string,result_type='arr',from_database=False):
-	if from_database:
+	if from_database == True:
 		return Pokedex.objects.all()
 
 	result_arr = []
