@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^searchGET$', 'search.views.srchget', name = 'search'),
     url(r'^searchPOST$', 'search.views.srchpost', name = 'searchPOST'),
     url(r'^searchLISTJS$', 'search.views.srchlistjs', name = 'searchLISTJS'),
+    url(r'^edit/(\d+)', 'search.views.edit', name = 'edit'),
     #un-named grouping
     #url(r'^search/(\d+)', 'search.views.srch2', name = 'search2'),
     #named-grouping

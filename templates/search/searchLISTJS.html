@@ -119,10 +119,11 @@
 	    {% for pokemon in result_arr %}
 	    	
 	    	<li>
-	    	  <h3 class="name">{{pokemon.name}}</h3>
+	    	  <h3 class="name">{{pokemon.pokemon_name}}</h3>
 	    	  <p class="born">
-	    	  		<img width='100px' src="{{pokemon.image_url}}">
+	    	  		<img width='100px' src="{{pokemon.pokemon_image}}">
 	    	  </p>
+	    	  <a href='/edit/{{pokemon.id}}'>edit</a>
 	    	</li>
 
 	    {% endfor %}
