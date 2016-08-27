@@ -14,6 +14,7 @@
 
 <h1>Page #{{page}}</h1>
 
+
 <!--
 	{{pokedex}}
 -->
@@ -67,6 +68,15 @@
     </li>
   </ul>
 </nav> -->
+	
+{% for pokemon in pokedex %}
+	<p>{{pokemon.pokemon_name}} : 
+		type {{pokemon.pokemon_type}}</p>
+	<img src='{{pokemon.pokemon_image}}'>	
+	<a href='/edit/{{pokemon.id}}'>edit</a>
+	<hr>
+{% endfor %}
+
 
 
 	<!-- <div class='row'>

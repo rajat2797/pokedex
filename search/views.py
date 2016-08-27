@@ -213,5 +213,3 @@ def random(request):
 	return render(request, 'search/random.html', context_dict)
 
 
-
-
