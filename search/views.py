@@ -105,9 +105,10 @@ def edit(request,pokemon_id):
 
 def index(request):
 	today_date = time.ctime()
+	page_id = request.GET.get('page') or '1'
 	context_dict = {}
 	context_dict['date'] = today_date
-
+	context_dict['page'] = page_id
 	context_dict['pokedex'] = Pokedex.objects.all()
 	
 	return render(request,'search/index.html',context_dict)
