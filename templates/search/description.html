@@ -18,6 +18,7 @@
 		<meta property="og:description" content=""/>
 		<meta property="og:image" content="{{pokemon.pokemon_image}}"/> 
 		<meta property="og:site_name" content="fathomless-garden-39911.herokuapp.com"/> 
+		<meta property="fb:app_id" content="1724325281176951" />
 
 		<meta property="og:url" content="http://fathomless-garden-39911.herokuapp.com/pokemon/{{pokemon.id}}/{{pokemon.pokemon_name}}" />
 		<meta property="article:author" content="http://facebook.com/one.saurav.tomar" />
@@ -66,8 +67,8 @@
 			<button class='btn btn-primary'>Share on Pinterest</button>
 		</a>
 
-		<a target='_blank' href='whatsapp://send?text=Hi there check this out http%3A//fathomless-garden-39911.herokuapp.com/pokemon/{{pokemon.id}}/{{pokemon.pokemon_name}}'>	
-			<button class='btn btn-primary'>Share on whatsapp</button>
+		<a id='whatsapp' target='_blank' href='whatsapp://send?text=Hi there check this out http%3A//fathomless-garden-39911.herokuapp.com/pokemon/{{pokemon.id}}/{{pokemon.pokemon_name}}'>	
+			<button class='btn btn-failure'>Share on whatsapp</button>
 		</a>
 
 		<a target='_blank' href='mailto:stomatrix@gmail.com?&cc=saurav@newsmeme.in&subject=Bug report &body=Hello,%20...%0A%0A%0Ahttp%3A//fathomless-garden-39911.herokuapp.com/pokemon/{{pokemon.id}}/{{pokemon.pokemon_name}}'>	
@@ -81,7 +82,26 @@
 
 {% endblock content %}
 
+{% block scripts %}
 
+	<script type="text/javascript">
+		
+		$(document).ready(function(){
 
+		   alert(navigator.userAgent);
+		   if (navigator.userAgent.match('Android') == null){
+		   		//user is on browser
+		   		$('#whatsapp').hide();
+		   		//document.getElementById('whatsapp').style.display = 'none';
+		   }
+		   else{
+		   		//user is on mobile
+		   }
+		   
+		});
+	
+	</script>
+
+{% endblock scripts %}
 
 
