@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.conf import settings
-from random import shuffle
+from random import shuffle,randint
 import time
 import os
 
@@ -208,6 +208,32 @@ def description(request,pokemon_id,pokemon_name):
 	context_dict = {}
 	context_dict['pokemon'] = pokemon
 	return render(request,'search/description.html',context_dict)
+
+def game(request):
+	pokemon_arr = Pokedex.objects.all()
+	
+	pokemon = pokemon_arr[0]
+	random_number1 = randint(0,len(pokemon_arr)-1)
+	random_number2 = randint(0,len(pokemon_arr)-1)
+	random_number3 = randint(0,len(pokemon_arr)-1)
+	random_number4 = randint(0,len(pokemon_arr)-1)
+	
+	pokemon = pokemon_arr[random_number1]
+	random_pokemon2 = pokemon_arr[random_number2]
+	random_pokemon3 = pokemon_arr[random_number3]
+	random_pokemon4 = pokemon_arr[random_number4]
+
+	pokemon_names = [pokemon.pokemon_name,
+				random_pokemon2.pokemon_name,
+				random_pokemon3.pokemon_name,
+				random_pokemon4.pokemon_name]
+	shuffle(pokemon_names)
+	
+	context_dict = {}
+	context_dict['pokemon'] = pokemon
+	context_dict['pokemon_names'] = pokemon_names
+
+	return render(request,'search/game.html',context_dict)
 
 def random(request):
 	list_dir = os.listdir(os.path.join(settings.STATIC_PATH,'images'))
