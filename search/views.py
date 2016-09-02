@@ -238,9 +238,11 @@ def game(request):
 		score = request.POST.get('user_score') or ''
 		context_dict['score'] = score
 		#return render(request,'search/game.html',context_dict)
-		return str(context_dict)
+		#return context_dict
+		a = [pokemon.pokemon_name,pokemon.pokemon_image]
+		a.append(pokemon_names)
 		#return HttpResponse(json.dumps(context_dict))
-		#return HttpResponse(context_dict)
+		return HttpResponse(json.dumps(a))
 
 	score = request.GET.get("score") or '0'
 	context_dict['score'] = score

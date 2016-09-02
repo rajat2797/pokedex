@@ -47,7 +47,7 @@
 	<div class='col-md-4 col-md-offset-2'>
 			<h3>What's the name of this pokemon ?</h3>
 			<br>
-			<img src='{{pokemon.pokemon_image}}'>
+			<img id='main_img' src='{{pokemon.pokemon_image}}'>
 			<hr>
 			{% for pokemon in pokemon_names %}
 				<button class="btn btn-primary option" data='{{pokemon}}' onclick='judge(this)'>{{pokemon}}</button>
@@ -97,13 +97,25 @@
 				score = parseInt(score) + 10;
 				//window.location.href= '/game?score='+ score;
 				
+				// $.ajax({
+				//   type: "POST",
+				//   url: "/game/",
+				//   data: {user_score: score,'csrfmiddlewaretoken': '{{ csrf_token }}' },
+				//   cache: false,
+				//   success: function(data){
+				//      console.log(data);
+				//   }
+				// });
+
 				$.post("/game/", 
 					{user_score: score,'csrfmiddlewaretoken': '{{ csrf_token }}' }, 
 					function(result){
 
 				     	//console.log(JSON.stringify(result));
 				     	//console.log(Object.getOwnPropertyNames(result));
-				     	console.log(result.ViewMarkup);
+				     	console.log(JSON.parse(result)[1]);
+				     	$('#main_img').attr('src',JSON.parse(result)[1]);
+
 					}
 				);
 			
