@@ -10,6 +10,9 @@
 			font-weight: bolder;
 			font-size: 1000%;
 		}
+		.option{
+			margin-right: 5px;
+		}
 	</style>
 {% endblock head %}
 
@@ -47,7 +50,7 @@
 			<img src='{{pokemon.pokemon_image}}'>
 			<hr>
 			{% for pokemon in pokemon_names %}
-				<button  class="btn btn-primary" data='{{pokemon}}' onclick='judge(this)'>{{pokemon}}</button>
+				<button class="btn btn-primary option" data='{{pokemon}}' onclick='judge(this)'>{{pokemon}}</button>
 			{% endfor %}
 	</div>
 
@@ -84,6 +87,33 @@
 	<script type="text/javascript">
 		
 		function judge(e){
+			console.log(e.getAttribute('data') + '={{pokemon.pokemon_name}}' );
+
+			if (e.getAttribute('data') == '{{pokemon.pokemon_name}}'){
+				console.log('correct answer');
+				console.log('Now redirecting');
+				//window.location.reload();
+				var score = document.getElementById('score').innerHTML;
+				score = parseInt(score) + 10;
+				//window.location.href= '/game?score='+ score;
+				
+				$.post("/game/", 
+					{user_score: score,'csrfmiddlewaretoken': '{{ csrf_token }}' }, 
+					function(result){
+
+				     	//console.log(JSON.stringify(result));
+				     	//console.log(Object.getOwnPropertyNames(result));
+				     	console.log(result.ViewMarkup);
+					}
+				);
+			
+			}
+			else{
+				console.log('wrong answer');
+			}
+		};
+
+		function judge_old_get(e){
 			console.log(e.getAttribute('data') + '={{pokemon.pokemon_name}}' );
 
 			if (e.getAttribute('data') == '{{pokemon.pokemon_name}}'){

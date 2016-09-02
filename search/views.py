@@ -4,6 +4,7 @@ from django.conf import settings
 from random import shuffle,randint
 import time
 import os
+import json
 
 from search.models import Pokedex
 
@@ -211,8 +212,6 @@ def description(request,pokemon_id,pokemon_name):
 
 def game(request):
 	pokemon_arr = Pokedex.objects.all()
-	score = request.GET.get("score") or '0'
-
 	#pokemon = pokemon_arr[0]
 	random_number1 = randint(0,len(pokemon_arr)-1)
 	random_number2 = randint(0,len(pokemon_arr)-1)
@@ -229,12 +228,22 @@ def game(request):
 				random_pokemon3.pokemon_name,
 				random_pokemon4.pokemon_name]
 	shuffle(pokemon_names)
-	
+
 	context_dict = {}
 	context_dict['pokemon'] = pokemon
-	context_dict['score'] = score
+	
 	context_dict['pokemon_names'] = pokemon_names
 
+	if request.method == 'POST':
+		score = request.POST.get('user_score') or ''
+		context_dict['score'] = score
+		#return render(request,'search/game.html',context_dict)
+		return str(context_dict)
+		#return HttpResponse(json.dumps(context_dict))
+		#return HttpResponse(context_dict)
+
+	score = request.GET.get("score") or '0'
+	context_dict['score'] = score
 	return render(request,'search/game.html',context_dict)
 
 def random(request):
